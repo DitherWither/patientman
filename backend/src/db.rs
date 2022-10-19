@@ -8,7 +8,7 @@ impl Database {
     /// Loads database from file and creates databases if needed
     pub fn init() -> Result<Self> {
         let mut db = Self {
-            connection: sqlite::Connection::open("sdc_patientman.db")?,
+            connection: sqlite::Connection::open("patientman.db")?,
         };
 
         db.create_table_patients()?;
