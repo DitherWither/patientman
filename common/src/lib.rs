@@ -1,14 +1,14 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub struct Patients {
+    id: u32,
+    first_name: String,
+    last_name: String,
+    age: i32,
+    gender: Gender,
+    address: String,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub enum Gender {
+    Male,
+    Female,
+    Other(String),
 }

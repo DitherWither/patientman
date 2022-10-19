@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "cargo",
+            "name": "Run Debug: backend",
+            "cargoArgs": ["run"],
+            "cargoExtraArgs": ["--bin", "backend"],
+            "environment": {
+                "RUST_BACKTRACE": "full",
+            },
+        },
+        {
+            "type": "cargo",
+            "name": "Run Debug: frontend-relm",
+            "cargoArgs": ["run"],
+            "cargoExtraArgs": ["--bin", "frontend-relm"],
+            "environment": {
+                "RUST_BACKTRACE": "full",
+            },
+        },
+        {
+            "type": "cargo",
+            "name": "cargofmt",
+            "cargoArgs": ["fmt"],
+        },
+
+    ]
+}
