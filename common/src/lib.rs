@@ -17,11 +17,28 @@ pub enum Gender {
     Other(String),
 }
 impl Gender {
+    /// Converts the Gender enum to a String
     pub fn to_string(&self) -> String {
         match self {
             Self::Male => String::from("MALE"),
             Self::Female => String::from("FEMALE"),
             Self::Other(text) => text.to_string(),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+
+    #[test]
+    /// Unit test for Gender::to_string()
+    fn test_gender_to_string() {
+        assert_eq!(Gender::Male.to_string(), "MALE");
+        assert_eq!(Gender::Female.to_string(), "FEMALE");
+        assert_eq!(
+            Gender::Other("SomeOtherGender".to_string()).to_string(),
+            "SomeOtherGender"
+        )
     }
 }

@@ -23,6 +23,12 @@
             "name": "cargofmt",
             "cargoArgs": ["fmt"],
         },
+        {
+            "type": "cargo",
+            "name": "Run unit tests",
+            "cargoArgs": ["test"],
+        },
+
 
     ]
 }
