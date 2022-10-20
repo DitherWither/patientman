@@ -1,4 +1,4 @@
-pub struct Patients {
+pub struct Patient {
     id: u32,
     first_name: String,
     last_name: String,
