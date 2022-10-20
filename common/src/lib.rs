@@ -1,3 +1,5 @@
+
+#[derive(Debug)]
 pub struct Patient {
     id: u32,
     first_name: String,
@@ -7,6 +9,7 @@ pub struct Patient {
     address: String,
 }
 
+#[derive(Debug)]
 pub enum Gender {
     Male,
     Female,
