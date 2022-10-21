@@ -12,9 +12,8 @@
 // You should have received a copy of the GNU General Public License along with patientman.
 // If not, see <https://www.gnu.org/licenses/>.
 
-
 use color_eyre::eyre::Result;
-use common::Patient;
+use common::*;
 
 pub struct Database {
     connection: sqlite::Connection,
@@ -77,5 +76,39 @@ impl Database {
             )?;
         }
         Ok(())
+    }
+
+    /// Gets all patients in Database and returns them as a Vec.
+    pub fn get_all_patients(&self) -> Result<Vec<Patient>> {
+        // SQL statement is prepared
+        let mut statement = self.connection.prepare("SELECT * FROM patients")?;
+
+        // query_map() is called on the statements to get the rows.
+        let patients_rows = statement.query_map([], |row| {
+            let gender: String = row.get(4)?;
+            let gender: Gender = match gender.to_ascii_uppercase().as_str() {
+                "MALE" => Gender::Male,
+                "FEMALE" => Gender::Female,
+                _ => Gender::Other(gender),
+            };
+
+            Ok(Patient {
+                id: row.get(0)?,
+                first_name: row.get(1)?,
+                last_name: row.get(2)?,
+                age: row.get(3)?,
+                gender,
+                address: row.get(5)?,
+            })
+        })?;
+
+        let mut patients = Vec::new();
+
+        // The rows returned by query_map() are MappedRows, so we convert them to a Vec<Patient>
+        for patient in patients_rows {
+            patients.push(patient?);
+        }
+
+        Ok(patients)
     }
 }
