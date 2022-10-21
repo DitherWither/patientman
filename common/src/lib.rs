@@ -30,16 +30,6 @@ pub enum Gender {
     Female,
     Other(String),
 }
-impl Gender {
-    //    /// Converts the Gender enum to a String
-    //    pub fn to_string(&self) -> String {
-    //        match self {
-    //            Self::Male => String::from("MALE"),
-    //            Self::Female => String::from("FEMALE"),
-    //            Self::Other(text) => text.to_string(),
-    //        }
-    //    }
-}
 
 impl std::fmt::Display for Gender {
     fn fmt(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
