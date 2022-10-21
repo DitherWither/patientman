@@ -28,6 +28,11 @@
             "name": "Run unit tests",
             "cargoArgs": ["test"],
         },
+        {
+            "type": "cargo",
+            "name": "Run cargo clippy",
+            "cargoArgs": ["clippy"],
+        },
 
 
     ]
