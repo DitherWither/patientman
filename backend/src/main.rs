@@ -34,5 +34,11 @@ fn main() -> Result<()> {
 
     db.insert_into_patients(&patient)?;
 
+    let patients = db.get_all_patients()?;
+
+    for patient in patients {
+        println!("Entry: {:?}", patient);
+    }
+
     Ok(())
 }
