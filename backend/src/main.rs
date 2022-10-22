@@ -14,31 +14,25 @@
 
 mod db;
 
-use color_eyre::eyre::Result;
-use common::*;
 use db::Database;
+use std::sync::Mutex;
 
-fn main() -> Result<()> {
-    // Installs the color_eyre panic and error report hanlers
-    color_eyre::install()?;
+// Maybe there is a better way to do this but this should work for now
+static DB: Mutex<Option<Database>> = Mutex::new(None);
 
-    let mut db = Database::init()?;
-    let patient = Patient {
-        id: 1,
-        first_name: "Turrdhan".to_string(),
-        last_name: "Chatil".to_string(),
-        age: 15,
-        gender: Gender::Male,
-        address: "fr, who knows".to_string(),
-    };
+#[rocket::get("/")]
+fn index() -> &'static str {
+    "Hello, World"
+}
 
-    db.insert_into_patients(&patient)?;
 
-    let patients = db.get_all_patients()?;
-
-    for patient in patients {
-        println!("Entry: {:?}", patient);
+#[rocket::launch]
+fn rocket() -> _ {
+    {
+        *DB.lock().unwrap() = Some(Database::init().unwrap());
     }
 
-    Ok(())
+    color_eyre::install().unwrap();
+    rocket::build()
+        .mount("/", rocket::routes![index])
 }
